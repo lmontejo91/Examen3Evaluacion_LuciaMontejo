@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metereologia xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="schemaTiempo.xsd">
+
+    <comunidad>
+        <nombre>Comunidad de Madrid</nombre>
+        <provincia>
+            <nombre>Madrid</nombre>
+            <poblacion>
+                <nombre>Alcobendas</nombre>
+                <prediccion>
+                    <fecha>2022-05-24</fecha>
+                    <temp_maxima>23.52</temp_maxima>
+                    <temp_minima>11</temp_minima>
+                    <probabilidad_lluvia>3</probabilidad_lluvia>
+                    <!-- No hay avisos de riesgo -->
+                </prediccion> 
+                <prediccion>
+                    <fecha>2022-05-23</fecha>
+                    <temp_maxima>28</temp_maxima>
+                    <temp_minima>15.60</temp_minima>
+                    <probabilidad_lluvia>0</probabilidad_lluvia>
+                    <!-- No hay avisos de riesgo -->
+                </prediccion> 
+            </poblacion>
+        </provincia>
+    </comunidad>
+
+    <comunidad>
+        <nombre>Galicia</nombre>
+        <provincia>
+            <nombre>A coruña</nombre>
+            <!-- NO incluye población: ERROR -->
+        </provincia>
+    </comunidad>
+
+</metereologia>

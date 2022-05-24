@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!-- ESTRUCTURA METEREOLOGÍA -->
+<xs:element name="metereologia">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="comunidad" minOccurs="0" maxOccurs="unbounded" type="tipo_comunidad"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<!-- ESTRUCTURA COMUNIDAD -->
+<xs:complexType name="tipo_comunidad">
+    <xs:sequence>
+        <xs:element name="nombre" type="tipo_nombre"/>
+        <xs:element name="provincia" type="tipo_provincia" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence> 
+</xs:complexType>
+
+<!-- ESTRUCTURA PROVINCIA -->
+<xs:complexType name="tipo_provincia">
+    <xs:sequence>
+        <xs:element name="nombre" type="tipo_nombre"/>
+        <xs:element name="poblacion" type="tipo_poblacion" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+</xs:complexType>
+
+<!-- ESTRUCTURA POBLACIÓN -->
+<xs:complexType name="tipo_poblacion">
+    <xs:sequence>
+        <xs:element name="nombre" type="tipo_nombre"/>
+        <xs:element name="prediccion" type="tipo_prediccion" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+</xs:complexType>
+
+<!-- ESTRUCTURA PREDICCIÓN -->
+<xs:complexType name="tipo_prediccion">
+    <xs:sequence>
+        <xs:element name="fecha" type="xs:date"/>
+        <xs:element name="temp_maxima" type="tipo_temperatura"/>
+        <xs:element name="temp_minima" type="tipo_temperatura"/>
+        <xs:element name="probabilidad_lluvia" type="tipo_lluvia"/>
+        <xs:element name="avisos_riesgo" type="tipo_avisos" minOccurs="0" maxOccurs="10"/>
+    </xs:sequence>
+</xs:complexType>
+
+<!-- RESTRICCIÓN PARA NOMBRE (se aplica a nombre de comunidad, de provincia y de población) -->
+<xs:simpleType name="tipo_nombre">
+    <xs:restriction base="xs:string">
+        <xs:pattern value="[A-Za-zÀ-ÿ]+(\s[A-Za-zÀ-ÿ]+)*"/>
+    </xs:restriction>
+</xs:simpleType>
+
+<!-- RESTRICCIÓN PARA TEMPERATURA (se aplica temp_maxima y temp_minima) -->
+<xs:simpleType name="tipo_temperatura">
+    <xs:restriction base="xs:decimal">
+        <xs:minInclusive value="-50"/>
+        <xs:maxInclusive value="50"/>
+        <xs:fractionDigits value="2"/> <!-- Limita el número de decimales que se pueden poner a dos. -->
+    </xs:restriction>
+</xs:simpleType>
+
+<!-- RESTRICCIÓN PARA PROBABILIDAD_LLUVIA -->
+<xs:simpleType name="tipo_lluvia">
+    <xs:restriction base="xs:integer">
+        <xs:minInclusive value="0"/>
+        <xs:maxInclusive value="100"/>
+    </xs:restriction>
+</xs:simpleType>
+
+<!-- RESTRICCIÓN PARA AVISOS_RIESGO -->
+<xs:simpleType name="tipo_avisos">
+    <xs:restriction base="xs:string">
+        <xs:pattern value="[vV]iento|[nN]ieve|[tT]ormentas|[hH]uracán"/>
+    </xs:restriction>
+</xs:simpleType>
+
+</xs:schema>
